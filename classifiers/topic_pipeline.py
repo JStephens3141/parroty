@@ -25,7 +25,6 @@ if Path(pipeline_filename).is_file():
     with open(pipeline_filename, 'rb') as input:
         text_clf = pickle.load(input)
 else:
-
     #Tokenizing Text
     count_vect = CountVectorizer()
 
