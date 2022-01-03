@@ -3,6 +3,16 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 
+import pickle
+from os.path import exists
+from pathlib import Path
+
+
+
+home = str(Path.home())
+project_folder = r'\parroty_workspace'
+output_folder = home + project_folder
+pipeline_filename = output_folder + 'parroty_pipeline.pickle'
 
 #Load dataset
 categories = ['alt.atheism','soc.religion.christian','comp.graphics', 'sci.med']
@@ -42,6 +52,12 @@ text_clf = Pipeline([
 text_clf.fit(twenty_train.data, twenty_train.target)
 
 predicted_pipeline = text_clf.predict(docs_new)
+
+
+##TODO: if file exists, load file instead of train
+output_file = pickle.dumps(predicted_pipeline)
+
+
 
 
 for doc, category in zip(docs_new, predicted_pipeline):
